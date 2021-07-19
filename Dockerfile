@@ -1,9 +1,9 @@
-FROM       ubuntu:focal
+FROM ubuntu:focal
 
 LABEL software="socialfish" \
       vendor="Marcos Pablo Russo" \
       email="marcospr1974@gmail.com" \
-      com.example.version="latest" \
+      com.example.version="3.0" \
       com.example.release-date="2021-07-15"
 
 ARG TZ="UTC"
@@ -14,7 +14,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
  && git clone https://github.com/UndeadSec/SocialFish.git \
  && cd SocialFish \
  && pip3 install -r requirements.txt \
- && chmod +x SocialFish.py 
+ && chmod +x SocialFish.py \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /SocialFish
 
